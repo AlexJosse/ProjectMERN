@@ -60,6 +60,14 @@ export class Signup extends React.Component {
                 >
                     Inscription
                 </Button>
+                <Button
+                    onClick={() => window.location = "/"}
+                    block
+                    bsSize="large"
+                    type="button"
+                >
+                    J'ai déjà un compte
+                </Button>
             </div>
         )
     }

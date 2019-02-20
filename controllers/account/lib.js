@@ -2,6 +2,13 @@ const User = require('../../schema/schemaUser.js');
 const passwordHash = require("password-hash");
 
 function signup(req, res) {
+   /* User.find({
+        email: 'e3@gmail.com'
+    }, function (err, result){
+        console.log(err);
+        console.log(result);
+    })*/
+
     if (!req.body.email || !req.body.password) {
         //Le cas où l'email ou bien le password ne serait pas soumit ou nul
         res.status(400).json({

@@ -17,7 +17,6 @@ var userSchema = mongoose.Schema({
     }
 },{ timestamps: { createdAt: 'created_at' }})
 
-
 userSchema.methods = {
     authenticate: function (password) {
         return passwordHash.verify(password, this.password);

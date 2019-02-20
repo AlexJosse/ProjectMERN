@@ -51,6 +51,14 @@ export class Login extends React.Component {
             >
             Connexion
             </Button>
+                <Button
+                    onClick={() => window.location = "/signup"}
+                    block
+                    bsSize="large"
+                    type="button"
+                >
+                    Inscription
+                </Button>
             </div>
     )
     }
