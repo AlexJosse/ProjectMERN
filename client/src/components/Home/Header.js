@@ -1,24 +1,16 @@
 import React from 'react';
-import { Dropdown } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import SmokingRooms from '@material-ui/icons/SmokingRooms';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import Button from "@material-ui/core/Button";
-import MenuList from "@material-ui/core/MenuList";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
-import Grow from "@material-ui/core/Grow";
+import MenuComponent from "./menuButton";
 
 const styles = theme => ({
     root: {
@@ -91,68 +83,23 @@ const styles = theme => ({
 
 class Header extends React.Component {
     state = {
-        open: false,
-        openR: false,
+        anchorEl: null
     };
 
-    handleToggle = () => {
-        this.setState(state => ({ open: !state.open }));
+    handleMenu = event => {
+        this.setState({ anchorEl: event.currentTarget });
     };
 
-    handleClose = event => {
-        if (this.anchorEl.contains(event.target)) {
-            return;
-        }
-
-        this.setState({ open: false });
-    };
-
-    handleToggleR = () => {
-        this.setState(state => ({ openR: !state.open }));
-    };
-
-    handleCloseR = event => {
-        if (this.anchorEl.contains(event.target)) {
-            return;
-        }
-
-        this.setState({ openR: false });
+    handleClose = () => {
+        this.setState({ anchorEl: null });
     };
 
 
     render() {
-        const {  open, openR } = this.state;
+        const { anchorEl  } = this.state;
         const { classes } = this.props;
 
-       /* const renderMenu = (
-            <Menu
-                anchorEl={anchorEl}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={isMenuOpen}
-                onClose={this.handleMenuClose}
-            >
-                <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-                <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-            </Menu>
-        );
-
-        const renderAccessoire = (
-            <Menu
-
-                anchorEl={anchorEl}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={isAccessoireOpen}
-                onClose={this.handleAccessoireClose}
-            >
-                <MenuItem onClick={this.handleAccessoireClose}>Briquets</MenuItem>
-                <MenuItem onClick={this.handleAccessoireClose}>Feuilles</MenuItem>
-                <MenuItem onClick={this.handleAccessoireClose}>Filtres</MenuItem>
-                <MenuItem onClick={this.handleAccessoireClose}>Grille</MenuItem>
-            </Menu>
-        );*/
-
+        const open = Boolean(anchorEl);
 
         return (
 
@@ -165,56 +112,6 @@ class Header extends React.Component {
                         <Typography className={classes.title} variant="h6" color="inherit" noWrap>
                             Livraison de nuit
                         </Typography>
-
-                        <Button
-                            variant="contained" color="primary" className={classes.button}
-                           // aria-owns={isAccessoireOpen ? 'header' : undefined}
-                            aria-haspopup="true"
-                            onClick={this.handleAccessoireOpen}
-                        >
-                            <Typography className={classes.title} variant="h6" align="center" color="inherit" noWrap>
-                                Accessoires
-                            </Typography>
-                        </Button>
-
-                        <Button
-                            variant="contained" color="primary" className={classes.button}
-                            //aria-owns={isAccessoireOpen ? 'header' : undefined}
-                            aria-haspopup="true"
-                            onClick={this.handleAccessoireOpen}
-                        >
-                            <Typography variant="h6" align="center" color="inherit" noWrap>
-                                Chicha Bang Pipes
-                            </Typography>
-                        </Button>
-                        <Button
-                            buttonRef={node => {
-                                this.anchorEl = node;
-                            }}
-                            aria-owns={openR ? 'menu-list-grow' : undefined}
-                            aria-haspopup="true"
-                            onClick={this.handleToggleR}
-                        >
-                            Toggle Menu Grow
-                        </Button>
-                        <Popper open={openR} anchorEl={this.anchorEl} transition disablePortal>
-                            {({ TransitionProps, placement }) => (
-                                <Grow
-                                    {...TransitionProps}
-                                    id="menu-list-grow"
-                                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                                >
-                                    <Paper>
-                                        <ClickAwayListener onClickAway={this.handleCloseR}>
-                                            <MenuList>
-                                                <MenuItem onClick={this.handleCloseR}>test</MenuItem>
-                                                <MenuItem onClick={this.handleCloseR}>test 2</MenuItem>
-                                            </MenuList>
-                                        </ClickAwayListener>
-                                    </Paper>
-                                </Grow>
-                            )}
-                        </Popper>
 
                         <div className={classes.search}>
                             <div className={classes.searchIcon}>
@@ -230,35 +127,18 @@ class Header extends React.Component {
                         </div>
                         <div className={classes.grow}/>
                         <div className={classes.sectionDesktop}>
-                            <IconButton
-                                buttonRef={node => {
-                                    this.anchorEl = node;
-                                }}
-                                aria-owns={open ? 'menu-list-grow' : undefined}
-                                aria-haspopup="true"
-                                onClick={this.handleToggle}
-                            >
-                                <AccountCircle/>
-                            </IconButton>
-                            <Popper open={open} anchorEl={this.anchorEl} transition disablePortal>
-                                {({ TransitionProps, placement }) => (
-                                    <Grow
-                                        {...TransitionProps}
-                                        id="menu-list-grow"
-                                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                                    >
-                                        <Paper>
-                                            <ClickAwayListener onClickAway={this.handleClose}>
-                                                <MenuList>
-                                                    <MenuItem onClick={this.handleClose}>My profil</MenuItem>
-                                                    <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                                                    <MenuItem onClick={this.handleClose}>Logout</MenuItem>
-                                                </MenuList>
-                                            </ClickAwayListener>
-                                        </Paper>
-                                    </Grow>
-                                )}
-                            </Popper>
+
+                                <MenuComponent
+                                    iconType={AccountCircle}
+                                    items={["Create", "List1", "List2"]}
+                                />
+
+
+                                <MenuComponent
+                                    iconType={AccountCircle}
+                                    items={["Profile", "User Management", "Logout"]}
+                                />
+
                         </div>
                     </Toolbar>
                 </AppBar>
@@ -275,7 +155,4 @@ Header.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-const HeaderComponent = withStyles(styles)(Header);
-export {
-    HeaderComponent
-};
+export const HeaderComponent = withStyles(styles)(Header);
