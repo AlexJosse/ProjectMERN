@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import CameraIcon from '@material-ui/icons/PhotoCamera';
+import SmokingRooms from '@material-ui/icons/SmokingRooms';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,10 +13,20 @@ import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import Icon from '@material-ui/core/Icon';
+import green from '@material-ui/core/colors/green';
 
 const styles = theme => ({
+
     appBar: {
         position: 'relative',
+        background: green.A400
+    },
+    button: {
+        margin: theme.spacing.unit,
+    },
+    rightIcon: {
+        marginLeft: theme.spacing.unit,
     },
     icon: {
         marginRight: theme.spacing.unit * 2,
@@ -72,10 +82,15 @@ function AlbumComponent(props) {
             <CssBaseline />
             <AppBar position="static" className={classes.appBar}>
                 <Toolbar>
-                    <CameraIcon className={classes.icon} />
-                    <Typography variant="h6" color="inherit" noWrap>
-                        Album layout
+                    <SmokingRooms className={classes.icon} />
+                    <Typography variant="h6" color="inherit" align="center">
+                        Livraison de nuit
                     </Typography>
+                    <Button size="small" variant="contained" color="primary" className={classes.button}>
+                        Send
+                        { }
+                        <Icon className={classes.rightIcon}>send</Icon>
+                    </Button>
                 </Toolbar>
             </AppBar>
             <main>
@@ -83,9 +98,9 @@ function AlbumComponent(props) {
                 <div className={classes.heroUnit}>
                     <div className={classes.heroContent}>
                         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                            Album layout
+                            Livraison de nuit
                         </Typography>
-                        <Typography variant="h6" align="center" color="textSecondary" paragraph>
+                        <Typography paragraph="true" variant="h6" align="center" color="textSecondary">
                             Something short and leading about the collection below—its contents, the creator, etc.
                             Make it short and sweet, but not too short so folks don&apos;t simply skip over it
                             entirely.
