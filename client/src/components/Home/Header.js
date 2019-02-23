@@ -10,7 +10,9 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import SmokingRooms from '@material-ui/icons/SmokingRooms';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuComponent from "./menuButton";
+import { MenuComponent } from "./menuButton";
+import { AppButtonComponent } from "./menuButton";
+import green from '@material-ui/core/colors/green';
 
 const styles = theme => ({
     root: {
@@ -29,6 +31,10 @@ const styles = theme => ({
             display: 'block',
         },
     },
+    appBar: {
+        backgroundColor : green.A400,
+        position : 'relative'
+        },
     search: {
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
@@ -104,7 +110,7 @@ class Header extends React.Component {
         return (
 
             <div className={classes.root}>
-                <AppBar position="static">
+                <AppBar className={classes.appBar}>
                     <Toolbar>
                         <IconButton className={classes.SmokingRooms} color="inherit" aria-label="Open drawer">
                             <SmokingRooms/>
@@ -112,7 +118,10 @@ class Header extends React.Component {
                         <Typography className={classes.title} variant="h6" color="inherit" noWrap>
                             Livraison de nuit
                         </Typography>
-
+                        <AppButtonComponent
+                            nameButton={"Accessoire"}
+                            items={["Tubes", "Grilles", ""]}
+                        />
                         <div className={classes.search}>
                             <div className={classes.searchIcon}>
                                 <SearchIcon/>
